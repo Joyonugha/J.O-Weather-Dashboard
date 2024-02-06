@@ -7,7 +7,7 @@ $(document).ready(function () {
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
     searchHistory.forEach(city => addToHistory(city));
     
-    // Function to display current weather information
+    // Function to display current weather information (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
     function displayCurrentWeather(weatherData) {
         // Logic to display current weather data in the #today section
         // For example, update the HTML elements with the weather data
@@ -48,6 +48,7 @@ $(document).ready(function () {
             url: currentWeatherURL,
             method: "GET",
             success: function (response) {
+                console.log(response);
                 displayCurrentWeather(response);
             },
             error: function (error) {
