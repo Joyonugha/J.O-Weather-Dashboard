@@ -57,7 +57,7 @@ $(document).ready(function () {
         });
     }
     
-    // Function to get 5-day forecast data
+    // Function to get 5-day forecast data (Ref link: https://stackoverflow.com/questions/38839852/returning-one-object-with-the-result-of-two-ajax-get-calls)
     function getForecast(city) {
         const forecastURL = `${FORECAST_BASE_URL}?q=${city}&appid=${API_Key}&units=metric`;
         
