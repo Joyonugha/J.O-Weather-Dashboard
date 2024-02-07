@@ -20,7 +20,7 @@ $(document).ready(function () {
         `);
     }
     
-    // Function to display 5-day forecast information
+    // Function to display 5-day forecast information(Ref link: https://stackoverflow.com/questions/47889134/jquery-how-do-i-append-an-array-item-in-a-loop)
     function displayForecast(forecastData) {
         // Logic to display 5-day forecast data in the #forecast section
         // For example, update the HTML elements with the forecast data
@@ -40,7 +40,7 @@ $(document).ready(function () {
         }
     }
     
-    // Function to get current weather data
+    // Function to get current weather data (Ref Link: https://www.w3schools.com/jquery/jquery_ajax_get_post.asp)
     function getCurrentWeather(city) {
         const currentWeatherURL = `${BASE_URL}?q=${city}&appid=${API_Key}&units=metric`;
         
@@ -57,7 +57,7 @@ $(document).ready(function () {
         });
     }
     
-    // Function to get 5-day forecast data (Ref link: https://stackoverflow.com/questions/38839852/returning-one-object-with-the-result-of-two-ajax-get-calls)
+    // Function to get 5-day forecast data (Ref link: https://www.w3schools.com/jquery/jquery_ajax_get_post.asp)
     function getForecast(city) {
         const forecastURL = `${FORECAST_BASE_URL}?q=${city}&appid=${API_Key}&units=metric`;
         
@@ -73,7 +73,7 @@ $(document).ready(function () {
         });
     }
     
-    // Function to add the searched city to the history list
+    // Function to add the searched city to the history list (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
     function addToHistory(city) {
         // Logic to add city to the #history list
         $("#history").prepend(`
@@ -84,7 +84,7 @@ $(document).ready(function () {
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
     }
     
-    // Event listener for the search form
+    // Event listener for the search form (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
     $("#search-form").submit(function (event) {
         event.preventDefault();
         const city = $("#search-input").val().trim();
@@ -96,7 +96,7 @@ $(document).ready(function () {
         }
     });
     
-    // Event listener for clicking on a city in the history list
+    // Event listener for clicking on a city in the history list (Ref link: https://stackoverflow.com/questions/18079656/jquery-onclick-preventdefault)
     $("#history").on("click", "a", function (event) {
         event.preventDefault();
         const city = $(this).text();
