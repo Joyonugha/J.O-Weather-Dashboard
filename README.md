@@ -11,8 +11,8 @@ The Weather Dashboard is a user-friendly online portal for accessing current and
 * Javascript
 
 ## Links
-* [Deployed website] (#)
-* [Repository] (#)
+* [Deployed website] (https://joyonugha.github.io/J.O-Weather-Dashboard/)
+* [Repository] (git clone )
 
 ## Usage
 When selecting the links from the top menu, you will be directed to the respective usage pages.
