@@ -17,5 +17,4 @@ The Weather Dashboard is a user-friendly online portal for accessing current and
 ## Usage
 When selecting the links from the top menu, you will be directed to the respective usage pages.
 
-[J.O Weather-Dashboard] (<img width="1440" alt="Screenshot 2024-02-09 at 14 08 33" src="https://github.com/Joyonugha/J.O-Weather-Dashboard/assets/152298577/7e0beab6-9a9d-4a8f-ad43-3503a1f32aab">
-)
+![Screenshot1](./assets/Images/Screenshot%202024-02-09%20at%2014.08.33.png)
