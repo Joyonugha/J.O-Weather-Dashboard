@@ -12,9 +12,10 @@ The Weather Dashboard is a user-friendly online portal for accessing current and
 
 ## Links
 * [Deployed website] (https://joyonugha.github.io/J.O-Weather-Dashboard/)
-* [Repository] (git clone )
+* [Repository] (git clone git@github.com:Joyonugha/J.O-Weather-Dashboard.git) 
 
 ## Usage
 When selecting the links from the top menu, you will be directed to the respective usage pages.
 
-[J.O Weather-Dashboard] (/Users/joyonugha/Desktop/bootcamp/Assignment/J.O-Planner-App/Asset/Images/Screenshot 2024-01-31 at 23.18.01.png)
+[J.O Weather-Dashboard] (<img width="1440" alt="Screenshot 2024-02-09 at 14 08 33" src="https://github.com/Joyonugha/J.O-Weather-Dashboard/assets/152298577/7e0beab6-9a9d-4a8f-ad43-3503a1f32aab">
+)
