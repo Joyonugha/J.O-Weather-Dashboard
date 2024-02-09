@@ -17,4 +17,4 @@ The Weather Dashboard is a user-friendly online portal for accessing current and
 ## Usage
 When selecting the links from the top menu, you will be directed to the respective usage pages.
 
-![Screenshot1](./assets/Images/Screenshot%202024-02-09%20at%2014.08.33.png)
+![Screenshot1](./assets/Images/Screenshot%202024-02-07%20at%2018.51.33%20(2).png)
