@@ -7,37 +7,24 @@ $(document).ready(function () {
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
     searchHistory.forEach(city => addToHistory(city));
     
-    // Function to display current weather information (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
-    // function displayCurrentWeather(weatherData) {
+    // Function to display current weather information
+    function displayCurrentWeather(weatherData) {
+        // Construct the URL for the weather icon
+        const weatherIconUrl = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
+    
         // Logic to display current weather data in the #today section
-        // For example, update the HTML elements with the weather data
-        // $("#today").html(`
-        //     <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
-        //     <p>${new Date().toLocaleString()}</p>
-        //     <p>Temperature: ${weatherData.main.temp}°C</p>
-        //     <p>Humidity: ${weatherData.main.humidity}%</p>
-        //     <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
-        // `);
-        function displayCurrentWeather(weatherData) {
-            // Construct the URL for the weather icon
-            const weatherIconUrl = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
-        
-            // Logic to display current weather data in the #today section
-            $("#today").html(`
-                <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
-                <p>${new Date().toLocaleString()}</p>
-                <p>Temperature: ${weatherData.main.temp}°C</p>
-                <p>Humidity: ${weatherData.main.humidity}%</p>
-                <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
-                <img src="${weatherIconUrl}" alt="Weather Icon">
-            `);
-        }
+        $("#today").html(`
+            <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
+            <p>${new Date().toLocaleString()}</p>
+            <p>Temperature: ${weatherData.main.temp}°C</p>
+            <p>Humidity: ${weatherData.main.humidity}%</p>
+            <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+            <img src="${weatherIconUrl}" alt="Weather Icon">
+        `);
     }
     
-    // Function to display 5-day forecast information(Ref link: https://stackoverflow.com/questions/47889134/jquery-how-do-i-append-an-array-item-in-a-loop)
+    // Function to display 5-day forecast information
     function displayForecast(forecastData) {
-        // Logic to display 5-day forecast data in the #forecast section
-        // For example, update the HTML elements with the forecast data
         $("#forecast").empty(); // Clear previous forecast data
     
         for (let i = 0; i < forecastData.list.length; i += 8) {
@@ -54,7 +41,7 @@ $(document).ready(function () {
         }
     }
     
-    // Function to get current weather data (Ref Link: https://www.w3schools.com/jquery/jquery_ajax_get_post.asp)
+    // Function to get current weather data
     function getCurrentWeather(city) {
         const currentWeatherURL = `${BASE_URL}?q=${city}&appid=${API_Key}&units=metric`;
         
@@ -62,7 +49,6 @@ $(document).ready(function () {
             url: currentWeatherURL,
             method: "GET",
             success: function (response) {
-                console.log(response);
                 displayCurrentWeather(response);
             },
             error: function (error) {
@@ -71,7 +57,7 @@ $(document).ready(function () {
         });
     }
     
-    // Function to get 5-day forecast data (Ref link: https://www.w3schools.com/jquery/jquery_ajax_get_post.asp)
+    // Function to get 5-day forecast data
     function getForecast(city) {
         const forecastURL = `${FORECAST_BASE_URL}?q=${city}&appid=${API_Key}&units=metric`;
         
@@ -87,18 +73,16 @@ $(document).ready(function () {
         });
     }
     
-    // Function to add the searched city to the history list (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
+    // Function to add the searched city to the history list
     function addToHistory(city) {
-        // Logic to add city to the #history list
         $("#history").prepend(`
             <a href="#" class="list-group-item list-group-item-action">${city}</a>
         `);
-        // Add the city to the search history in local storage
         searchHistory.push(city);
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
     }
     
-    // Event listener for the search form (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
+    // Event listener for the search form
     $("#search-form").submit(function (event) {
         event.preventDefault();
         const city = $("#search-input").val().trim();
@@ -110,7 +94,7 @@ $(document).ready(function () {
         }
     });
     
-    // Event listener for clicking on a city in the history list (Ref link: https://stackoverflow.com/questions/18079656/jquery-onclick-preventdefault)
+    // Event listener for clicking on a city in the history list
     $("#history").on("click", "a", function (event) {
         event.preventDefault();
         const city = $(this).text();
@@ -118,206 +102,326 @@ $(document).ready(function () {
         getForecast(city);
     });
 });
-
-
-
-
 // $(document).ready(function () {
 //     const API_Key = "58c03c765fc3561060028e9cde96da90";
-//     const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
-//     const FORECAST_BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
-       
-// // Load search history from local storage
-//         let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-//         searchHistory.forEach(city => addToHistory(city));
-   
-//     // Function to display current weather information
+//     const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+//     const FORECAST_BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
+    
+//     // Load search history from local storage
+//     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+//     searchHistory.forEach(city => addToHistory(city));
+    
+//     // Function to display current weather information (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
 //     // function displayCurrentWeather(weatherData) {
-//        // Logic to display current weather data in the #today section
-//        function getCurrentWeather(city) {
-//         var currentWeatherURL = `${BASE_URL}weather?q=${city}&appid=${API_Key}&units=metric`;
+//         // Logic to display current weather data in the #today section
+//         // For example, update the HTML elements with the weather data
+//         // $("#today").html(`
+//         //     <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
+//         //     <p>${new Date().toLocaleString()}</p>
+//         //     <p>Temperature: ${weatherData.main.temp}°C</p>
+//         //     <p>Humidity: ${weatherData.main.humidity}%</p>
+//         //     <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+//         // `);
+//         function displayCurrentWeather(weatherData) {
+//             // Construct the URL for the weather icon
+//             const weatherIconUrl = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
         
-//         $.ajax({
-//           url: currentWeatherURL,
-//           method: "GET",
-//         }).then(function (response) {
-//           displayCurrentWeather(response);
-//         });
-//      };
-//     };
-//     // Function to display 5-day forecast information
-//     function displayForecast(forecastData) {
-//        // Logic to display 5-day forecast data in the #forecast section
+//             // Logic to display current weather data in the #today section
+//             $("#today").html(`
+//                 <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
+//                 <p>${new Date().toLocaleString()}</p>
+//                 <p>Temperature: ${weatherData.main.temp}°C</p>
+//                 <p>Humidity: ${weatherData.main.humidity}%</p>
+//                 <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+//                 <img src="${weatherIconUrl}" alt="Weather Icon">
+//             `);
+//         }
 //     }
-//     function getForecast(city) {
-//         const FORECAST_BASE_URL = `${BASE_URL}forecast?q=${city}&appid=${API_Key}&units=metric`;
+    
+//     // Function to display 5-day forecast information(Ref link: https://stackoverflow.com/questions/47889134/jquery-how-do-i-append-an-array-item-in-a-loop)
+//     function displayForecast(forecastData) {
+//         // Logic to display 5-day forecast data in the #forecast section
+//         // For example, update the HTML elements with the forecast data
+//         $("#forecast").empty(); // Clear previous forecast data
+    
+//         for (let i = 0; i < forecastData.list.length; i += 8) {
+//             const forecastItem = forecastData.list[i];
+//             const forecastDate = new Date(forecastItem.dt_txt).toLocaleDateString();
+    
+//             $("#forecast").append(`
+//                 <div class="col-md-2">
+//                     <h5>${forecastDate}</h5>
+//                     <p>Temperature: ${forecastItem.main.temp}°C</p>
+//                     <p>Humidity: ${forecastItem.main.humidity}%</p>
+//                 </div>
+//             `);
+//         }
+//     }
+    
+//     // Function to get current weather data (Ref Link: https://www.w3schools.com/jquery/jquery_ajax_get_post.asp)
+//     function getCurrentWeather(city) {
+//         const currentWeatherURL = `${BASE_URL}?q=${city}&appid=${API_Key}&units=metric`;
         
 //         $.ajax({
-//           url: FORECAST_BASE_URL,
-//           method: "GET",
-//         }).then(function (response) {
-//           displayForecast(response);
+//             url: currentWeatherURL,
+//             method: "GET",
+//             success: function (response) {
+//                 console.log(response);
+//                 displayCurrentWeather(response);
+//             },
+//             error: function (error) {
+//                 console.error("Error fetching current weather:", error);
+//             }
 //         });
-//      }
-   
-//     // Function to add the searched city to the history list
+//     }
+    
+//     // Function to get 5-day forecast data (Ref link: https://www.w3schools.com/jquery/jquery_ajax_get_post.asp)
+//     function getForecast(city) {
+//         const forecastURL = `${FORECAST_BASE_URL}?q=${city}&appid=${API_Key}&units=metric`;
+        
+//         $.ajax({
+//             url: forecastURL,
+//             method: "GET",
+//             success: function (response) {
+//                 displayForecast(response);
+//             },
+//             error: function (error) {
+//                 console.error("Error fetching forecast:", error);
+//             }
+//         });
+//     }
+    
+//     // Function to add the searched city to the history list (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
 //     function addToHistory(city) {
-//        // Logic to add city to the #history list
+//         // Logic to add city to the #history list
 //         $("#history").prepend(`
-//           <a href="#" class="list-group-item list-group-item-action">${city}</a>
+//             <a href="#" class="list-group-item list-group-item-action">${city}</a>
 //         `);
 //         // Add the city to the search history in local storage
 //         searchHistory.push(city);
 //         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-//      };
-   
-//     // Event listener for the search form
+//     }
+    
+//     // Event listener for the search form (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
 //     $("#search-form").submit(function (event) {
-//        event.preventDefault();
-//        const city = $("#search-input").val().trim();
-   
-//        if (city !== "") {
-//          getCurrentWeather(city);
-//          getForecast(city);
-//          addToHistory(city);
-//        }
+//         event.preventDefault();
+//         const city = $("#search-input").val().trim();
+    
+//         if (city !== "") {
+//             getCurrentWeather(city);
+//             getForecast(city);
+//             addToHistory(city);
+//         }
 //     });
-//     // Event listener for clicking on a city in the history list
+    
+//     // Event listener for clicking on a city in the history list (Ref link: https://stackoverflow.com/questions/18079656/jquery-onclick-preventdefault)
 //     $("#history").on("click", "a", function (event) {
-//        event.preventDefault();
-//        const city = $(this).text();
-//        getCurrentWeather(city);
-//        getForecast(city);
+//         event.preventDefault();
+//         const city = $(this).text();
+//         getCurrentWeather(city);
+//         getForecast(city);
 //     });
 // });
 
 
 
 
-
-// const API_KEY = "143ad771cb4e29b9e89cde60c972163e";
-// const WEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
-// const FORECAST_BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
-
-// // Function to get current weather data
-// function getCurrentWeather(city) {
-//  const currentWeatherURL = `${WEATHER_BASE_URL}${city}&appid=${API_KEY}&units=metric`;
-
-//  $.ajax({
-//     url: currentWeatherURL,
-//     method: "GET",
-//  }).then(function (response) {
-//     displayCurrentWeather(response);
-//  });
-// }
-
-// // Function to get 5-day forecast data
-// function getForecast(city) {
-//  const forecastURL = `${FORECAST_BASE_URL}${city}&appid=${API_KEY}&units=metric`;
-
-//  $.ajax({
-//     url: forecastURL,
-//     method: "GET",
-//  }).then(function (response) {
-//     displayForecast(response);
-//  });
-// }
-
 // // $(document).ready(function () {
-// //     // Replace "YOUR_API_KEY" with your actual OpenWeatherMap API key
-// //     const API_KEY = "f2dc2a32462d8ccb788af0c44897a018";
+// //     const API_Key = "58c03c765fc3561060028e9cde96da90";
 // //     const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
-  
+// //     const FORECAST_BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
+       
+// // // Load search history from local storage
+// //         let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+// //         searchHistory.forEach(city => addToHistory(city));
+   
+// //     // Function to display current weather information
+// //     // function displayCurrentWeather(weatherData) {
+// //        // Logic to display current weather data in the #today section
+// //        function getCurrentWeather(city) {
+// //         var currentWeatherURL = `${BASE_URL}weather?q=${city}&appid=${API_Key}&units=metric`;
+        
+// //         $.ajax({
+// //           url: currentWeatherURL,
+// //           method: "GET",
+// //         }).then(function (response) {
+// //           displayCurrentWeather(response);
+// //         });
+// //      };
+// //     };
+// //     // Function to display 5-day forecast information
+// //     function displayForecast(forecastData) {
+// //        // Logic to display 5-day forecast data in the #forecast section
+// //     }
+// //     function getForecast(city) {
+// //         const FORECAST_BASE_URL = `${BASE_URL}forecast?q=${city}&appid=${API_Key}&units=metric`;
+        
+// //         $.ajax({
+// //           url: FORECAST_BASE_URL,
+// //           method: "GET",
+// //         }).then(function (response) {
+// //           displayForecast(response);
+// //         });
+// //      }
+   
+// //     // Function to add the searched city to the history list
+// //     function addToHistory(city) {
+// //        // Logic to add city to the #history list
+// //         $("#history").prepend(`
+// //           <a href="#" class="list-group-item list-group-item-action">${city}</a>
+// //         `);
+// //         // Add the city to the search history in local storage
+// //         searchHistory.push(city);
+// //         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+// //      };
+   
 // //     // Event listener for the search form
 // //     $("#search-form").submit(function (event) {
-// //       event.preventDefault();
-// //       const city = $("#search-input").val().trim();
-  
-// //       if (city !== "") {
-// //         // Call functions to get and display weather data
-// //         getCurrentWeather(city);
-// //         getForecast(city);
-  
-// //         // Add the searched city to the history list
-// //         addToHistory(city);
-// //       }
+// //        event.preventDefault();
+// //        const city = $("#search-input").val().trim();
+   
+// //        if (city !== "") {
+// //          getCurrentWeather(city);
+// //          getForecast(city);
+// //          addToHistory(city);
+// //        }
 // //     });
+// //     // Event listener for clicking on a city in the history list
+// //     $("#history").on("click", "a", function (event) {
+// //        event.preventDefault();
+// //        const city = $(this).text();
+// //        getCurrentWeather(city);
+// //        getForecast(city);
+// //     });
+// // });
+
+
+
+
+
+// // const API_KEY = "143ad771cb4e29b9e89cde60c972163e";
+// // const WEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
+// // const FORECAST_BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
+
+// // // Function to get current weather data
+// // function getCurrentWeather(city) {
+// //  const currentWeatherURL = `${WEATHER_BASE_URL}${city}&appid=${API_KEY}&units=metric`;
+
+// //  $.ajax({
+// //     url: currentWeatherURL,
+// //     method: "GET",
+// //  }).then(function (response) {
+// //     displayCurrentWeather(response);
+// //  });
+// // }
+
+// // // Function to get 5-day forecast data
+// // function getForecast(city) {
+// //  const forecastURL = `${FORECAST_BASE_URL}${city}&appid=${API_KEY}&units=metric`;
+
+// //  $.ajax({
+// //     url: forecastURL,
+// //     method: "GET",
+// //  }).then(function (response) {
+// //     displayForecast(response);
+// //  });
+// // }
+
+// // // $(document).ready(function () {
+// // //     // Replace "YOUR_API_KEY" with your actual OpenWeatherMap API key
+// // //     const API_KEY = "f2dc2a32462d8ccb788af0c44897a018";
+// // //     const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
   
-// //     // Function to get current weather data
-// //     function getCurrentWeather(city) {
-// //       const currentWeatherURL = `${BASE_URL}weather?q=${city}&appid=${API_KEY}&units=metric`;
+// // //     // Event listener for the search form
+// // //     $("#search-form").submit(function (event) {
+// // //       event.preventDefault();
+// // //       const city = $("#search-input").val().trim();
+  
+// // //       if (city !== "") {
+// // //         // Call functions to get and display weather data
+// // //         getCurrentWeather(city);
+// // //         getForecast(city);
+  
+// // //         // Add the searched city to the history list
+// // //         addToHistory(city);
+// // //       }
+// // //     });
+  
+// // //     // Function to get current weather data
+// // //     function getCurrentWeather(city) {
+// // //       const currentWeatherURL = `${BASE_URL}weather?q=${city}&appid=${API_KEY}&units=metric`;
+  
+// // //       $.ajax({
+// // //         url: currentWeatherURL,
+// // //         method: "GET",
+// // //       }).then(function (response) {
+// // //         // Call a function to display current weather information
+// // //         displayCurrentWeather(response);
+// // //       });
+// // //     }
+  
+// //     // Function to get 5-day forecast data
+// //     function getForecast(city) {
+// //       const forecastURL = `${BASE_URL}forecast?q=${city}&appid=${API_KEY}&units=metric`;
   
 // //       $.ajax({
-// //         url: currentWeatherURL,
+// //         url: forecastURL,
 // //         method: "GET",
 // //       }).then(function (response) {
-// //         // Call a function to display current weather information
-// //         displayCurrentWeather(response);
+// //         // Call a function to display 5-day forecast information
+// //         displayForecast(response);
 // //       });
 // //     }
   
-//     // Function to get 5-day forecast data
-//     function getForecast(city) {
-//       const forecastURL = `${BASE_URL}forecast?q=${city}&appid=${API_KEY}&units=metric`;
+// //     // Function to display current weather information
+// //     function displayCurrentWeather(weatherData) {
+// //       // Update the 'today' section in your HTML with the current weather information
+// //       // Use the provided elements and classes to display the necessary details
+// //       $("#today").html(`
+// //         <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
+// //         <p>${dayjs().format("MMMM D, YYYY")}</p>
+// //         <p>Temperature: ${weatherData.main.temp}°C</p>
+// //         <p>Humidity: ${weatherData.main.humidity}%</p>
+// //         <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+// //       `);
+// //     }
   
-//       $.ajax({
-//         url: forecastURL,
-//         method: "GET",
-//       }).then(function (response) {
-//         // Call a function to display 5-day forecast information
-//         displayForecast(response);
-//       });
-//     }
+// //     // Function to display 5-day forecast information
+// //     function displayForecast(forecastData) {
+// //       // Update the 'forecast' section in your HTML with the 5-day forecast information
+// //       // Use the provided elements and classes to display the necessary details
+// //       $("#forecast").empty(); // Clear previous forecast data
   
-//     // Function to display current weather information
-//     function displayCurrentWeather(weatherData) {
-//       // Update the 'today' section in your HTML with the current weather information
-//       // Use the provided elements and classes to display the necessary details
-//       $("#today").html(`
-//         <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
-//         <p>${dayjs().format("MMMM D, YYYY")}</p>
-//         <p>Temperature: ${weatherData.main.temp}°C</p>
-//         <p>Humidity: ${weatherData.main.humidity}%</p>
-//         <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
-//       `);
-//     }
+// //       for (let i = 0; i < forecastData.list.length; i += 8) {
+// //         const forecastItem = forecastData.list[i];
+// //         const forecastDate = dayjs(forecastItem.dt_txt).format("MMMM D, YYYY");
   
-//     // Function to display 5-day forecast information
-//     function displayForecast(forecastData) {
-//       // Update the 'forecast' section in your HTML with the 5-day forecast information
-//       // Use the provided elements and classes to display the necessary details
-//       $("#forecast").empty(); // Clear previous forecast data
+// //         $("#forecast").append(`
+// //           <div class="col-md-2">
+// //             <h5>${forecastDate}</h5>
+// //             <p>Temperature: ${forecastItem.main.temp}°C</p>
+// //             <p>Humidity: ${forecastItem.main.humidity}%</p>
+// //           </div>
+// //         `);
+// //       }
+// //     }
   
-//       for (let i = 0; i < forecastData.list.length; i += 8) {
-//         const forecastItem = forecastData.list[i];
-//         const forecastDate = dayjs(forecastItem.dt_txt).format("MMMM D, YYYY");
+// //     // Function to add the searched city to the history list
+// //     function addToHistory(city) {
+// //       // Add the city to the 'history' list in your HTML
+// //       // Use the provided elements and classes to display the city
+// //       $("#history").prepend(`
+// //         <a href="#" class="list-group-item list-group-item-action">${city}</a>
+// //       `);
+// //     }
   
-//         $("#forecast").append(`
-//           <div class="col-md-2">
-//             <h5>${forecastDate}</h5>
-//             <p>Temperature: ${forecastItem.main.temp}°C</p>
-//             <p>Humidity: ${forecastItem.main.humidity}%</p>
-//           </div>
-//         `);
-//       }
-//     }
+// //     // Event listener for clicking on a city in the history list
+// //     $("#history").on("click", "a", function (event) {
+// //       event.preventDefault();
+// //       const city = $(this).text();
   
-//     // Function to add the searched city to the history list
-//     function addToHistory(city) {
-//       // Add the city to the 'history' list in your HTML
-//       // Use the provided elements and classes to display the city
-//       $("#history").prepend(`
-//         <a href="#" class="list-group-item list-group-item-action">${city}</a>
-//       `);
-//     }
-  
-//     // Event listener for clicking on a city in the history list
-//     $("#history").on("click", "a", function (event) {
-//       event.preventDefault();
-//       const city = $(this).text();
-  
-//       // Call functions to get and display weather data for the selected city
-//       getCurrentWeather(city);
-//       getForecast(city);
-//     });
-//   });
+// //       // Call functions to get and display weather data for the selected city
+// //       getCurrentWeather(city);
+// //       getForecast(city);
+// //     });
+// //   });
