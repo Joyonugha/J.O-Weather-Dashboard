@@ -8,16 +8,30 @@ $(document).ready(function () {
     searchHistory.forEach(city => addToHistory(city));
     
     // Function to display current weather information (Ref link: https://www.youtube.com/watch?v=w0VEOghdMpQ)
-    function displayCurrentWeather(weatherData) {
+    // function displayCurrentWeather(weatherData) {
         // Logic to display current weather data in the #today section
         // For example, update the HTML elements with the weather data
-        $("#today").html(`
-            <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
-            <p>${new Date().toLocaleString()}</p>
-            <p>Temperature: ${weatherData.main.temp}°C</p>
-            <p>Humidity: ${weatherData.main.humidity}%</p>
-            <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
-        `);
+        // $("#today").html(`
+        //     <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
+        //     <p>${new Date().toLocaleString()}</p>
+        //     <p>Temperature: ${weatherData.main.temp}°C</p>
+        //     <p>Humidity: ${weatherData.main.humidity}%</p>
+        //     <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+        // `);
+        function displayCurrentWeather(weatherData) {
+            // Construct the URL for the weather icon
+            const weatherIconUrl = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
+        
+            // Logic to display current weather data in the #today section
+            $("#today").html(`
+                <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
+                <p>${new Date().toLocaleString()}</p>
+                <p>Temperature: ${weatherData.main.temp}°C</p>
+                <p>Humidity: ${weatherData.main.humidity}%</p>
+                <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+                <img src="${weatherIconUrl}" alt="Weather Icon">
+            `);
+        }
     }
     
     // Function to display 5-day forecast information(Ref link: https://stackoverflow.com/questions/47889134/jquery-how-do-i-append-an-array-item-in-a-loop)
